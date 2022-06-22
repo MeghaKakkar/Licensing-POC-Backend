@@ -1,16 +1,16 @@
 package com;
 
 import com.repository.LicenceRepository;
-import com.service.LicenceService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 @SpringBootApplication()
-@ComponentScan(basePackageClasses = LicenceService.class)
-@EnableJpaRepositories(basePackageClasses = {LicenceRepository.class})
-
+@EnableMongoRepositories("com.repository")
+@ComponentScan("com.*")
 public class AppStartup {
 
     public static void main(String[] args) {

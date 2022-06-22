@@ -1,36 +1,54 @@
 package com.controller;
 
-import com.model.LicenceEntity;
+import com.model.Licence;
 import com.service.LicenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/v1/licence")
+@RequestMapping("/api/licence")
 public class LicenceController {
 
     @Autowired
     private LicenceService licenceService;
 
     @GetMapping
-    public ResponseEntity<LicenceEntity> get(@RequestParam int id) {
+    public List<Licence> getAll() {
+        return licenceService.getAll();
+    }
+
+
+    @GetMapping("/getById/{id}")
+    public ResponseEntity<Licence> getById(@PathVariable String id) {
         return licenceService.getById(id);
     }
 
+    @GetMapping("/getByKey/{key}")
+    public ResponseEntity<Licence> getByKey(@PathVariable String key) {
+        return licenceService.getByKey(key);
+    }
+
+    @GetMapping("/getByApplicationName/{applicationName}")
+    public ResponseEntity<Licence> getByApplicationName(@PathVariable String applicationName) {
+        return licenceService.getByApplicationName(applicationName);
+    }
+
     @PostMapping
-    public ResponseEntity<HttpStatus> create(@RequestBody LicenceEntity licence) {
+    public ResponseEntity<HttpStatus> create(@RequestBody Licence licence) {
         return licenceService.create(licence);
     }
 
     @PutMapping
-    public ResponseEntity<HttpStatus> update(@RequestParam int id,@RequestBody LicenceEntity licence) {
-        return licenceService.update(licence);
+    public ResponseEntity<HttpStatus> update(@RequestParam String id, @RequestBody Licence licence) {
+        return licenceService.update(id, licence);
     }
 
     @DeleteMapping
-    public ResponseEntity<HttpStatus> deleteEmployeeById(@RequestParam("id") int id) {
-        return licenceService.deleteById(id);
+    public ResponseEntity<HttpStatus> deleteByKey(@RequestParam("key") String key) {
+        return licenceService.deleteByKey(key);
     }
 }
