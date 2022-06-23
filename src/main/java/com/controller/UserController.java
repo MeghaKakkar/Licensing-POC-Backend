@@ -18,8 +18,4 @@ public class UserController {
         return "Welcome User";
     }
 
-    @GetMapping("/user2/{key}/{value}")
-    public String user(@PathVariable String key, @PathVariable String value){
-        return "Welcome User";
-    }
 }
