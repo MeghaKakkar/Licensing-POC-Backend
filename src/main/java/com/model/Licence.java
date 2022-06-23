@@ -1,26 +1,39 @@
 package com.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
+import java.math.BigInteger;
 
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
-@Document(collection = "licence")
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Licence {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
+	private String productKey;
+	private String applicationName;
 
-    @Id
-    String id;
-    @Indexed(unique = true)
-    String key;
-    String applicationName;
 
-    // TODO - need proper field for licence
-
+    public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getProductKey() {
+		return productKey;
+	}
+	public void setProductKey(String key) {
+		this.productKey = key;
+	}
+	public String getApplicationName() {
+		return applicationName;
+	}
+	public void setApplicationName(String applicationName) {
+		this.applicationName = applicationName;
+	}
+	
 }

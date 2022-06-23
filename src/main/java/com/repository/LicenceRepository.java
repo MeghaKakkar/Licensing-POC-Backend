@@ -1,15 +1,16 @@
 package com.repository;
 
-import com.model.Licence;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
-
 import java.util.Optional;
 
-@Repository
-public interface LicenceRepository extends MongoRepository<Licence, String> {
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-    Optional<Licence> findByKey(String key);
+import com.model.Licence;
+
+@Repository
+public interface LicenceRepository extends CrudRepository<Licence, Long> {
+
+    Optional<Licence> findByProductKey(String key);
 
     Optional<Licence> findByApplicationName(String applicationName);
 

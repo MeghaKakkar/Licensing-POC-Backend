@@ -13,42 +13,41 @@ import java.util.List;
 @RequestMapping("/api/licence")
 public class LicenceController {
 
-    @Autowired
-    private LicenceService licenceService;
+	@Autowired
+	private LicenceService licenceService;
+	
+	  
+	  @GetMapping 
+	  public List<Licence> getAll() { return licenceService.getAll(); }
+	 
 
-    @GetMapping
-    public List<Licence> getAll() {
-        return licenceService.getAll();
-    }
+	@GetMapping("/getById/{id}")
+	public Licence getById(@PathVariable Long id) {
+		return licenceService.getById(id);
+	}
 
+	/*
+	 * @GetMapping("/getByKey/{key}") public ResponseEntity<Licence>
+	 * getByKey(@PathVariable String key) { return licenceService.getByKey(key); }
+	 */
 
-    @GetMapping("/getById/{id}")
-    public ResponseEntity<Licence> getById(@PathVariable String id) {
-        return licenceService.getById(id);
-    }
+	@GetMapping("/getByApplicationName/{applicationName}")
+	public ResponseEntity<Licence> getByApplicationName(@PathVariable String applicationName) {
+		return licenceService.getByApplicationName(applicationName);
+	}
 
-    @GetMapping("/getByKey/{key}")
-    public ResponseEntity<Licence> getByKey(@PathVariable String key) {
-        return licenceService.getByKey(key);
-    }
+	@PostMapping
+	public void create(@RequestBody Licence licence) {
+		licenceService.create(licence);
+	}
 
-    @GetMapping("/getByApplicationName/{applicationName}")
-    public ResponseEntity<Licence> getByApplicationName(@PathVariable String applicationName) {
-        return licenceService.getByApplicationName(applicationName);
-    }
-
-    @PostMapping
-    public ResponseEntity<HttpStatus> create(@RequestBody Licence licence) {
-        return licenceService.create(licence);
-    }
-
-    @PutMapping
-    public ResponseEntity<HttpStatus> update(@RequestParam String id, @RequestBody Licence licence) {
-        return licenceService.update(id, licence);
-    }
-
-    @DeleteMapping
-    public ResponseEntity<HttpStatus> deleteByKey(@RequestParam("key") String key) {
-        return licenceService.deleteByKey(key);
-    }
+	/*
+	 * @PutMapping public ResponseEntity<HttpStatus> update(@RequestParam String
+	 * id, @RequestBody Licence licence) { return licenceService.update(id,
+	 * licence); }
+	 * 
+	 * @DeleteMapping public ResponseEntity<HttpStatus>
+	 * deleteByKey(@RequestParam("key") String key) { return
+	 * licenceService.deleteByKey(key); }
+	 */
 }
