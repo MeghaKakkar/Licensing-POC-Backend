@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .antMatcher("/**")
                 .authorizeRequests()
-                .antMatchers("/oauth/authorize**", "/login**", "/error**")
+                .antMatchers("/oauth/authorize**", "/login**", "/error**","/swagger-ui**","/swagger-ui/**","/api-docs/**")
                 .permitAll()
                 .and()
                 .authorizeRequests()
