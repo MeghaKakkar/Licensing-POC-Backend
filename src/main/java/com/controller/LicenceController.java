@@ -15,13 +15,13 @@ public class LicenceController {
 
 	@Autowired
 	private LicenceService licenceService;
-	
-	  
-	  @GetMapping 
-	  public List<Licence> getAll() { return licenceService.getAll(); }
-	 
 
-	@GetMapping("/getById/{id}")
+
+	@GetMapping 
+	public List<Licence> getAll() { return licenceService.getAll(); }
+
+
+	@GetMapping("/{id}")
 	public Licence getById(@PathVariable Long id) {
 		return licenceService.getById(id);
 	}
@@ -32,7 +32,7 @@ public class LicenceController {
 	 */
 
 	@GetMapping("/getByApplicationName/{applicationName}")
-	public ResponseEntity<Licence> getByApplicationName(@PathVariable String applicationName) {
+	public List<Licence> getByApplicationName(@PathVariable String applicationName) {
 		return licenceService.getByApplicationName(applicationName);
 	}
 
@@ -41,13 +41,7 @@ public class LicenceController {
 		licenceService.create(licence);
 	}
 
-	/*
-	 * @PutMapping public ResponseEntity<HttpStatus> update(@RequestParam String
-	 * id, @RequestBody Licence licence) { return licenceService.update(id,
-	 * licence); }
-	 * 
-	 * @DeleteMapping public ResponseEntity<HttpStatus>
-	 * deleteByKey(@RequestParam("key") String key) { return
-	 * licenceService.deleteByKey(key); }
-	 */
+	@DeleteMapping("/{id}")
+	public void deleteByKey(@PathVariable Long id)
+	{  licenceService.deleteById(id); }
 }
