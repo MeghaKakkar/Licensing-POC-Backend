@@ -22,9 +22,9 @@ public class CommonAspect {
 	// advice for all the rest api calls 
 	@Before("execution(public * com.controller.*.*(..))")
 	public void beforeControllerAdvice(JoinPoint joinPoint) {
-		System.out.println("user :- " + SecurityContextHolder.getContext().getAuthentication().getName() + "\n");
-		System.out.println("executed method :- " + joinPoint + "\n");	
-		Arrays.stream(joinPoint.getArgs()).forEach(arg -> System.out.println(arg.toString()));
+		System.out.println("controller -->" + joinPoint);
+		System.out.println("accessed by user :- " + SecurityContextHolder.getContext().getAuthentication().getName());			
+		Arrays.stream(joinPoint.getArgs()).forEach(arg -> System.out.println("request params --> "+arg.toString()));
 	}
 	
 	// advice for all the services and repository 
@@ -35,7 +35,7 @@ public class CommonAspect {
 
 	@Before("beforeAdvice()")
 	public void beforeServiceAdvice(JoinPoint joinPoint) {
-		System.out.println("executed method :- " + joinPoint + "\n");		
+		System.out.println("executed method :- " + joinPoint);		
 		
 	}
 
